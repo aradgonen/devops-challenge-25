@@ -28,3 +28,4 @@ deploy:
     - docker push $DOCKER_REPO:latest
   on:
     branch: master
+    
