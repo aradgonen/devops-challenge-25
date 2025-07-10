@@ -28,5 +28,13 @@ def get_secret():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/health', methods=['GET'])
+def health():
+    return jsonify({
+        "status": "healthy",
+        "container": "https://hub.docker.com/r/aradgonen98/zenity-devops-challenge",
+        "project": "https://github.com/aradgonen/devops-challenge-25"
+    }), 200
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

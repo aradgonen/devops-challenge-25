@@ -33,5 +33,13 @@ class SecretEndpointTest(unittest.TestCase):
         self.assertEqual(response.status_code, 500)
         self.assertIn('error', response.get_json())
 
+    def test_health_endpoint(self):
+        response = self.client.get('/health')
+        self.assertEqual(response.status_code, 200)
+        data = response.get_json()
+        self.assertEqual(data['status'], 'healthy')
+        self.assertEqual(data['container'], 'https://hub.docker.com/r/aradgonen98/zenity-devops-challenge')
+        self.assertEqual(data['project'], 'https://github.com/aradgonen/devops-challenge-25')
+
 if __name__ == '__main__':
     unittest.main()
