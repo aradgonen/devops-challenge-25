@@ -1,0 +1,21 @@
+language: minimal
+
+services:
+  - docker
+
+env:
+  global:
+    - IMAGE_NAME=thedoctor-dynamodb-server
+    - DOCKER_REPO=yourdockerhubusername/thedoctor-dynamodb-server
+
+before_install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
+script:
+  - docker build -t $IMAGE_NAME .
+
+deploy:
+  provider: script
+  script: docker tag $IMAGE_NAME $DOCKER_REPO:latest && docker push $DOCKER_REPO:latest
+  on:
+    branch: main
