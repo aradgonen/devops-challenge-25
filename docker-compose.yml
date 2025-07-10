@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./python-app
+    container_name: zenity-devops-app
+    env_file:
+      - ./python-app/.env
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
